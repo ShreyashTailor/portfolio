@@ -12,17 +12,13 @@ import { getRegistryItemNamespace, getRegistryItemUrl } from "@/utils/registry"
 import { IconCheck, IconCopy, IconX } from "@tabler/icons-react"
 import { CheckIcon, ChevronRightIcon } from "lucide-react"
 import type { PanelImperativeHandle } from "react-resizable-panels"
-import type {
-  RegistryItem,
-  registryItemFileSchema,
-  registryItemSchema,
-} from "shadcn/schema"
-import type { z } from "zod"
+import type { RegistryItem } from "shadcn/schema"
 
 import { trackEvent } from "@/lib/events"
 import type {
   createFileTreeForRegistryItemFiles,
   FileTree,
+  RegistryItemFile,
 } from "@/lib/registry"
 import { cn } from "@/lib/utils"
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
@@ -95,7 +91,7 @@ import { serializePreviewSearchParams } from "@/app/(preview)/lib/search-params"
 type View = "preview" | "code"
 
 type BlockViewerContext = {
-  item: z.infer<typeof registryItemSchema>
+  item: RegistryItem
 
   setView: (view: View) => void
 
@@ -104,7 +100,7 @@ type BlockViewerContext = {
 
   tree: ReturnType<typeof createFileTreeForRegistryItemFiles> | null
   highlightedFiles:
-    | (z.infer<typeof registryItemFileSchema> & {
+    | (RegistryItemFile & {
         highlightedContent: string
       })[]
     | null

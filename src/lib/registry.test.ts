@@ -1,6 +1,5 @@
-import type { registryItemFileSchema, registryItemSchema } from "shadcn/schema"
+import type { RegistryItem } from "shadcn/schema"
 import { describe, expect, it } from "vitest"
-import type { z } from "zod"
 
 import {
   createFileTreeForRegistryItemFiles,
@@ -9,9 +8,10 @@ import {
   getFileTarget,
   normalizeAliasTarget,
 } from "@/lib/registry"
+import type { RegistryItemFile } from "@/lib/registry"
 
-type RegistryFile = z.infer<typeof registryItemFileSchema>
-type RegistryFiles = z.infer<typeof registryItemSchema>["files"]
+type RegistryFile = RegistryItemFile
+type RegistryFiles = RegistryItem["files"]
 
 // These are characterization tests: the expected values are whatever the
 // current transforms produce. They pin the contract this site publishes as
